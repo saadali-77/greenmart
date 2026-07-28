@@ -11,28 +11,28 @@ async function main() {
   const fruits = await prisma.category.create({
     data: {
       name: "Fruits",
-      image: "/categories/fruits.png",
+      image: "/categories/fruits.jpg",
     },
   });
 
   const vegetables = await prisma.category.create({
     data: {
       name: "Vegetables",
-      image: "/categories/vegetables.png",
+      image: "/categories/vegetables.",
     },
   });
 
   const dairy = await prisma.category.create({
     data: {
       name: "Dairy",
-      image: "/categories/dairy.png",
+      image: "/categories/dairy.jpg",
     },
   });
 
   const bakery = await prisma.category.create({
     data: {
       name: "Bakery",
-      image: "/categories/bakery.png",
+      image: "/categories/bakery.jpg",
     },
   });
 
@@ -59,7 +59,7 @@ async function main() {
       slug: "fresh-apples",
       description: "Sweet and juicy apples.",
       price: 350,
-      image: "/products/apple.jpg",
+      image: '/products/Apples.jpg',
       stock: 50,
       featured: true,
       categoryId: fruits.id,
@@ -79,7 +79,7 @@ async function main() {
       slug: "mango",
       description: "Fresh seasonal mangoes.",
       price: 420,
-      image: "/products/mango.jpg",
+      image: "/products/mangoes.jpg",
       stock: 35,
       featured: true,
       categoryId: fruits.id,
@@ -205,7 +205,7 @@ async function main() {
       slug: "croissant",
       description: "Flaky butter croissant.",
       price: 220,
-      image: "/products/croissant.jpg",
+      image: "/products/cross.jpg",
       stock: 28,
       featured: true,
       categoryId: bakery.id,

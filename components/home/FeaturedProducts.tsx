@@ -1,77 +1,31 @@
-const products = [
-  {
-    name:"Fresh Apples",
-    price:250
-  },
-  {
-    name:"Organic Milk",
-    price:180
-  },
-  {
-    name:"Fresh Bread",
-    price:120
-  },
-  {
-    name:"Orange Juice",
-    price:300
-  }
-];
+import ProductCard from "./productCard";
+import { getFeaturedProducts } from "@/lib/api";
+import { Product } from "@/types/product";
 
+export default async function FeaturedProducts() {
+  const products: Product[] = await getFeaturedProducts();
 
-export default function FeaturedProducts(){
+  return (
+    <section className="py-16">
+      <div className="container mx-auto px-4">
+        {/* Heading */}
+        <div className="mb-10 text-center">
+          <h2 className="text-4xl font-bold">Featured Products</h2>
+          <p className="mt-3 text-base-content/70">
+            Discover our best-selling grocery items.
+          </p>
+        </div>
 
-return (
-
-<section className="max-w-7xl mx-auto px-6 py-16">
-
-
-<h2 className="text-3xl font-bold mb-8">
-Featured Products
-</h2>
-
-
-<div className="grid md:grid-cols-4 gap-6">
-
-
-{
-products.map(product=>(
-
-<div
-key={product.name}
-className="border rounded-xl p-5 hover:shadow-lg"
->
-
-<div className="h-40 bg-gray-100 rounded-lg flex items-center justify-center text-5xl">
-🍎
-</div>
-
-
-<h3 className="font-bold mt-4">
-{product.name}
-</h3>
-
-
-<p className="text-green-600 font-semibold mt-2">
-Rs. {product.price}
-</p>
-
-
-<button className="mt-4 bg-green-600 text-white px-4 py-2 rounded-lg">
-Add To Cart
-</button>
-
-
-</div>
-
-))
-}
-
-
-</div>
-
-
-</section>
-
-);
-
+        {/* Products Grid */}
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {products.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
