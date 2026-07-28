@@ -1,20 +1,26 @@
+
+import Hero from "@/components/home/Hero";
+import Categories from "@/components/home/Categories";
+import FeaturedProducts from "@/components/home/FeaturedProducts";
+import Offers from "@/components/home/Offers";
+
+
 export default function Home(){
 
-  return (
+return (
 
-    <section className="max-w-7xl mx-auto py-20 px-6">
+<>
 
-      <h1 className="text-5xl font-bold text-green-600">
-        Welcome to GreenMart
-      </h1>
+<Hero />
 
+<Categories />
 
-      <p className="mt-5 text-gray-600 text-lg">
-        Your online grocery store for fresh and quality products.
-      </p>
+<FeaturedProducts />
 
+<Offers />
 
-    </section>
+</>
 
-  );
+)
+
 }
