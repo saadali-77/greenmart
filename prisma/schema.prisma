@@ -24,6 +24,7 @@ model Product {
   description String
 
   price       Float
+  discount    Int      @default(0)
 
   image       String
 
