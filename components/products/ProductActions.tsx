@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ShoppingCart } from "lucide-react";
-
+import { toast } from "sonner";
 import { Product } from "@/types/product";
 import QuantitySelector from "@/components/cart/QuantitySelector";
 
@@ -47,8 +47,12 @@ export default function ProductActions({
       })
     );
 
+
     setQuantity(1);
+
+    toast.success(`${product.name} added to cart`);
   };
+    
 
   return (
     <div className="mt-8 space-y-6">

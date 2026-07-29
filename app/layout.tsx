@@ -3,7 +3,7 @@ import "./globals.css";
 import ReduxProvider from "@/Providers/ReduxProvider";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "GreenMart Store",
@@ -28,7 +28,13 @@ export default function RootLayout({
           {children}
         </main>
 
-        <Footer />
+        <Footer /> 
+        <Toaster
+    position="top-right"
+    richColors
+    closeButton
+  />
+
         </ReduxProvider>
 
       </body>

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Trash2 } from "lucide-react";
+import { toast } from "sonner";
 
 import QuantitySelector from "./QuantitySelector";
 import { CartItem as CartItemType } from "@/Store/features/Cart/cartTypes";
@@ -20,6 +21,14 @@ export default function CartItem({ item }: CartItemProps) {
   const dispatch = useAppDispatch();
 
   const subtotal = item.price * item.quantity;
+
+  const handleRemove = () => {
+    dispatch(removeFromCart(item.id));
+
+    toast.success(`${item.name} removed from cart`, {
+      description: "The item has been removed successfully.",
+    });
+  };
 
   return (
     <div className="flex flex-col gap-5 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm md:flex-row md:items-center">
@@ -69,8 +78,9 @@ export default function CartItem({ item }: CartItemProps) {
       {/* Remove */}
       <button
         type="button"
-        onClick={() => dispatch(removeFromCart(item.id))}
+        onClick={handleRemove}
         className="self-center rounded-xl p-3 text-red-500 transition hover:bg-red-50"
+        aria-label={`Remove ${item.name}`}
       >
         <Trash2 size={20} />
       </button>
