@@ -1,4 +1,4 @@
-import ProductGrid from "@/components/products/productGrid";
+import ProductSearch from "@/components/products/productsearch";
 
 export default function ProductsPage() {
   return (
@@ -6,7 +6,7 @@ export default function ProductsPage() {
       <h1 className="mb-8 text-4xl font-bold">
         All Products
       </h1>
-<ProductGrid/>
+
       
     </main>
   );
