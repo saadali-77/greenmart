@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useAppSelector } from "@/Store/hooks";
 
 export default function CartSummary() {
@@ -40,9 +41,12 @@ export default function CartSummary() {
         <span>Rs. {subtotal}</span>
       </div>
 
-      <button className="w-full rounded-xl bg-green-600 py-3 font-semibold text-white hover:bg-green-700">
+      <Link
+        href="/checkout"
+        className="block w-full rounded-xl bg-green-600 py-3 text-center font-semibold text-white hover:bg-green-700"
+      >
         Proceed to Checkout
-      </button>
+      </Link>
     </aside>
   );
 }
