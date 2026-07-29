@@ -1,6 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CartItem } from "./carttype";
-import { Product } from "@/types/product";
+
+interface CartProduct {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+  price: number;
+  discount: number;
+  image: string;
+  stock: number;
+}
 
 interface CartState {
   items: CartItem[];
@@ -14,28 +24,32 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCart: (
-      state,
-      action: PayloadAction<{
-        product: Product;
-        quantity: number;
-      }>
-    ) => {
-      const { product, quantity } = action.payload;
+   addToCart: (
+  state,
+  action: PayloadAction<{
+    product: CartProduct;
+    quantity: number;
+  }>
+) => {
+  const { product, quantity } = action.payload;
 
-      const existingItem = state.items.find(
-        (item) => item.id === product.id
-      );
+  console.log("Quantity received:", quantity);
 
-      if (existingItem) {
-        existingItem.quantity += quantity;
-      } else {
-        state.items.push({
-          ...product,
-          quantity,
-        });
-      }
-    },
+  const existingItem = state.items.find(
+    (item) => item.id === product.id
+  );
+
+  if (existingItem) {
+    existingItem.quantity += quantity;
+  } else {
+    state.items.push({
+      ...product,
+      quantity,
+    });
+  }
+
+  console.log("Cart:", state.items);
+},
 
     removeFromCart: (
       state,
@@ -54,7 +68,7 @@ const cartSlice = createSlice({
         (item) => item.id === action.payload
       );
 
-      if (item) {
+      if (item && item.quantity < item.stock) {
         item.quantity++;
       }
     },

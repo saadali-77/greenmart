@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { getProductBySlug, getRelatedProducts } from "@/lib/api";
 import Image from "next/image";
 import ProductGrid from "@/components/products/productGrid";
-
+import ProductActions from '@/components/products/ProductActions'
 interface ProductPageProps {
   params: Promise<{
     slug: string;
@@ -105,9 +105,13 @@ export default async function ProductPage({
             )}
           </div>
 
-          <button className="mt-8 rounded-xl bg-green-600 px-8 py-3 text-white font-semibold hover:bg-green-700 transition">
+          {/* <button className="mt-8 rounded-xl bg-green-600 px-8 py-3 text-white font-semibold hover:bg-green-700 transition">
             Add to Cart
-          </button>
+          </button> */}
+
+        <ProductActions product={product} />
+
+
 
         </div>
 
