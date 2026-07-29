@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ShoppingCart, Search } from "lucide-react";
+import { Search } from "lucide-react";
+import CartButton from "@/components/cart/CartButton";
 
 export default function Navbar() {
   return (
@@ -24,9 +25,11 @@ export default function Navbar() {
 
           <Search size={22}/>
 
-          <Link href="/cart">
-            <ShoppingCart size={22}/>
-          </Link>
+          <CartButton />
+          
+           <button className="rounded-lg bg-green-600 px-4 py-2 text-white">
+            Login
+  </button>
 
         </div>
 

@@ -16,7 +16,13 @@ export default function QuantitySelector({
   return (
     <div className="flex w-fit items-center overflow-hidden rounded-xl border border-gray-300">
       <button
-        onClick={onDecrease}
+        type="button"
+        aria-label="Decrease quantity"
+        onClick={(event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          onDecrease();
+        }}
         disabled={quantity <= 1}
         className="flex h-11 w-11 items-center justify-center transition hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50"
       >
@@ -28,7 +34,13 @@ export default function QuantitySelector({
       </div>
 
       <button
-        onClick={onIncrease}
+        type="button"
+        aria-label="Increase quantity"
+        onClick={(event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          onIncrease();
+        }}
         className="flex h-11 w-11 items-center justify-center transition hover:bg-gray-100"
       >
         <Plus size={18} />

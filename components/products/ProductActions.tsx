@@ -20,7 +20,17 @@ export default function ProductActions({
 
   const [quantity, setQuantity] = useState(1);
 
+  const handleIncrease = () => {
+    setQuantity((current) => Math.min(product.stock || 1, current + 1));
+  };
+
+  const handleDecrease = () => {
+    setQuantity((current) => Math.max(1, current - 1));
+  };
+
   const handleAddToCart = () => {
+    const selectedQuantity = Math.min(quantity, product.stock || 1);
+
     dispatch(
       addToCart({
         product: {
@@ -29,11 +39,11 @@ export default function ProductActions({
           slug: product.slug,
           description: product.description,
           price: product.price,
-          discount: product.discount,
+          discount: product.discount ?? 0,
           image: product.image,
           stock: product.stock,
         },
-        quantity,
+        quantity: selectedQuantity,
       })
     );
 
@@ -44,8 +54,8 @@ export default function ProductActions({
     <div className="mt-8 space-y-6">
       <QuantitySelector
         quantity={quantity}
-        onIncrease={() => setQuantity((q) => q + 1)}
-        onDecrease={() => setQuantity((q) => Math.max(1, q - 1))}
+        onIncrease={handleIncrease}
+        onDecrease={handleDecrease}
       />
 
       <button
