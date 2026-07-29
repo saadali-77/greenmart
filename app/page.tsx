@@ -30,7 +30,7 @@ return (
     Popular Products
   </h2>
 
-  <ProductGrid />
+  <ProductGrid products={products}/>
 
 </section>
 

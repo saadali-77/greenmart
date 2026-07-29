@@ -1,73 +1,71 @@
 import Image from "next/image";
 import { ShoppingCart } from "lucide-react";
+import { Product } from "@/types/product";
 
 interface ProductCardProps {
-  name: string;
-  price: number;
-  discount: number;
-  category: string;
-  image: string;
+  product: Product;
 }
 
 export default function ProductCard({
-  name,
-  price,
-  discount,
-  category,
-  image,
+  product,
 }: ProductCardProps) {
-  const originalPrice = Math.round(price / (1 - discount / 100));
+
+  const originalPrice =
+    product.discount > 0
+      ? Math.round(product.price / (1 - product.discount / 100))
+      : null;
 
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
-      {/* Product Image */}
-      <div className="relative h-48 w-full">
+    <div className="rounded-2xl border p-4 bg-white">
+
+      <div className="relative h-48">
         <Image
-          src={image}
-          alt={name}
+          src={product.image}
+          alt={product.name}
           fill
-          className="object-cover"
+          className="object-cover rounded-xl"
         />
-
-        {/* Discount Badge */}
-        <div className="absolute top-3 left-3 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded">
-          {discount}% OFF
-        </div>
       </div>
 
-      {/* Content */}
-      <div className="p-4">
-        <p className="text-sm text-green-600 font-medium">
-          {category}
-        </p>
 
-        <h3 className="text-lg font-semibold mt-1">
-          {name}
-        </h3>
+      <h3 className="mt-4 font-semibold text-lg">
+        {product.name}
+      </h3>
 
-        {/* Price */}
-        <div className="mt-4">
-          <div className="flex items-center gap-2">
-            <span className="text-xl font-bold text-green-600">
-              Rs. {price}
-            </span>
 
-            <span className="text-sm text-gray-500 line-through">
-              Rs. {originalPrice}
-            </span>
-          </div>
+      <p className="text-sm text-gray-500">
+        {product.category.name}
+      </p>
 
-          <p className="text-xs text-green-600 mt-1">
-            Save Rs. {originalPrice - price}
-          </p>
-        </div>
 
-        {/* Button */}
-        <button className="mt-4 w-full bg-green-600 text-white px-3 py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-green-700">
-          <ShoppingCart size={18} />
-          Add
-        </button>
+      <div className="flex items-center gap-2 mt-3">
+
+        <span className="text-xl font-bold">
+          Rs. {product.price}
+        </span>
+
+
+        {originalPrice && (
+          <span className="line-through text-gray-400">
+            Rs. {originalPrice}
+          </span>
+        )}
+
       </div>
+
+
+      {product.discount > 0 && (
+        <span className="text-green-600 text-sm">
+          {product.discount}% OFF
+        </span>
+      )}
+
+
+      <button className="mt-4 flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg">
+        <ShoppingCart size={18} />
+        Add to Cart
+      </button>
+
     </div>
   );
 }

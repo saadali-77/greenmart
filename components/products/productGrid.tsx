@@ -1,22 +1,21 @@
-import ProductCard from '@/components/products/productCard';
-    import { products } from '@/src/data/products';
+import ProductCard from "./productCard";
+import { Product } from "@/types/product";
 
-export default function ProductGrid() {
+interface ProductGridProps {
+  products?: Product[];
+}
+
+export default function ProductGrid({
+  products = [],
+}: ProductGridProps) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
       {products.map((product) => (
         <ProductCard
-        category=''
           key={product.id}
-          name={product.name}
-          price={product.price}
-          discount={30}
-          
-          image={product.image}
+          product={product}
         />
       ))}
-
     </div>
   );
 }

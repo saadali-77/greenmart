@@ -1,18 +1,21 @@
 import { prisma } from "./prisma";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
 export async function getFeaturedProducts() {
-  const res = await fetch(`${BASE_URL}/api/products/featured`, {
-    cache: "no-store",
+  return prisma.product.findMany({
+    where: {
+      featured: true,
+    },
+    include: {
+      category: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch featured products");
-  }
-
-  return res.json();
 }
+
+
 export async function getAllProducts() {
   return prisma.product.findMany({
     include: {
@@ -20,6 +23,23 @@ export async function getAllProducts() {
     },
     orderBy: {
       createdAt: "desc",
+    },
+  });
+}
+
+
+export async function getDiscountedProducts() {
+  return prisma.product.findMany({
+    where: {
+      discount: {
+        gt: 0,
+      },
+    },
+    include: {
+      category: true,
+    },
+    orderBy: {
+      discount: "desc",
     },
   });
 }
