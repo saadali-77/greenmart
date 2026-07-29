@@ -1,3 +1,5 @@
+import { prisma } from "./prisma";
+
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
 export async function getFeaturedProducts() {
@@ -10,4 +12,14 @@ export async function getFeaturedProducts() {
   }
 
   return res.json();
+}
+export async function getAllProducts() {
+  return prisma.product.findMany({
+    include: {
+      category: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 }

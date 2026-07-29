@@ -18,11 +18,6 @@ export default function ProductCard({ product }: ProductCardProps) {
           sizes="(max-width:768px) 100vw, (max-width:1200px) 50vw, 25vw"
           className="object-cover transition-transform duration-300 group-hover:scale-110"
         />
-
-        {/* Discount Badge */}
-        <div className="absolute left-3 top-3 badge badge-error font-semibold">
-          {product.discount}% OFF
-        </div>
       </div>
 
       {/* Content */}
@@ -45,19 +40,9 @@ export default function ProductCard({ product }: ProductCardProps) {
         {/* Price */}
         <div className="flex items-center justify-between">
           <div>
-            <div className="flex items-center gap-2">
-              <span className="text-2xl font-bold text-success">
-                Rs. {product.price}
-              </span>
-
-              <span className="text-sm text-base-content/50 line-through">
-                Rs. {product.originalPrice}
-              </span>
-            </div>
-
-            <p className="mt-1 text-xs text-success font-medium">
-              Save Rs. {product.originalPrice - product.price}
-            </p>
+            <span className="text-2xl font-bold text-success">
+              Rs. {product.price}
+            </span>
           </div>
 
           <span className="text-sm text-base-content/60">
