@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-
+import ReduxProvider from "@/Providers/ReduxProvider";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
 
       <body>
-
+     <ReduxProvider>
         <Navbar />
 
         <main className="min-h-screen">
@@ -29,6 +29,7 @@ export default function RootLayout({
         </main>
 
         <Footer />
+        </ReduxProvider>
 
       </body>
 
