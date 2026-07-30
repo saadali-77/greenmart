@@ -58,7 +58,9 @@ model Order {
   notes String?
 
   paymentMethod String
-  status        String @default("Pending")
+
+  status         OrderStatus   @default(PENDING)
+  paymentStatus  PaymentStatus @default(UNPAID)
 
   subtotal Float
   shipping Float
@@ -69,6 +71,19 @@ model Order {
 
   items OrderItem[]
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 model OrderItem {
   id String @id @default(cuid())
@@ -83,4 +98,19 @@ model OrderItem {
   product Product @relation(fields: [productId], references: [id])
 
   createdAt DateTime @default(now())
+}
+
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  UNPAID
+  PAID
+  REFUNDED
 }

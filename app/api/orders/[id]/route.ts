@@ -52,20 +52,19 @@ export async function GET(
     return NextResponse.json(order);
 
 
-  } catch(error) {
+  } 
 
-    console.error("GET ORDER ERROR:", error);
+catch (error) {
+  console.error(error);
 
-
-    return NextResponse.json(
-      {
-        message:"Internal server error",
-      },
-      {
-        status:500,
-      }
-    );
-
-  }
-
+  return NextResponse.json(
+    {
+      message: "Internal server error",
+      error: String(error),
+    },
+    {
+      status: 500,
+    }
+  )
+}
 }

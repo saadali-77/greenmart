@@ -57,9 +57,13 @@ export async function POST(req: NextRequest) {
 
     let subtotal = 0;
 
-    const orderItems = [];
+    const orderItems: {
+      productId: string;
+      quantity: number;
+      price: number;
+    }[] = [];
 
-    // Verify products from database
+    // Verify products
     for (const item of items) {
       const product = await prisma.product.findUnique({
         where: {
@@ -71,7 +75,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json(
           {
             success: false,
-            message: `Product not found.`,
+            message: "Product not found.",
           },
           { status: 404 }
         );
@@ -102,30 +106,48 @@ export async function POST(req: NextRequest) {
     const shipping = subtotal >= 3000 ? 0 : 250;
     const total = subtotal + shipping;
 
-    // Create Order
-    const order = await prisma.order.create({
-      data: {
-        firstName,
-        lastName,
-        email,
-        phone,
-        address,
-        city,
-        postalCode,
-        country,
-        notes,
-        paymentMethod,
-        subtotal,
-        shipping,
-        total,
+    // Create order + update stock in one transaction
+    const order = await prisma.$transaction(async (tx) => {
+      const newOrder = await tx.order.create({
+        data: {
+          firstName,
+          lastName,
+          email,
+          phone,
+          address,
+          city,
+          postalCode,
+          country,
+          notes,
+          paymentMethod,
+          subtotal,
+          shipping,
+          total,
 
-        items: {
-          create: orderItems,
+          items: {
+            create: orderItems,
+          },
         },
-      },
-      include: {
-        items: true,
-      },
+        include: {
+          items: true,
+        },
+      });
+
+      // Reduce stock
+      for (const item of items) {
+        await tx.product.update({
+          where: {
+            id: item.id,
+          },
+          data: {
+            stock: {
+              decrement: item.quantity,
+            },
+          },
+        });
+      }
+
+      return newOrder;
     });
 
     return NextResponse.json(
