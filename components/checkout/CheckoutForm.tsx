@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -8,10 +9,19 @@ import {
   CheckoutFormData,
 } from "@/lib/validation/checkout";
 
+import { useAppDispatch, useAppSelector } from '@/Store/hooks';
+import { clearCart } from '@/Store/features/Cart/cartSlice'
+
 import PaymentMethod from "./PaymentMethod";
 import PlaceOrderButton from "./PlaceOrderButton";
 
 export default function CheckoutForm() {
+  const router = useRouter();
+
+  const dispatch = useAppDispatch();
+
+  const cartItems = useAppSelector((state) => state.cart.items);
+
   const {
     register,
     handleSubmit,
@@ -33,10 +43,57 @@ export default function CheckoutForm() {
   });
 
   const onSubmit = async (data: CheckoutFormData) => {
-    console.log(data);
+    try {
+      if (cartItems.length === 0) {
+        alert("Your cart is empty.");
+        return;
+      }
 
-    // Next step:
-    // await fetch("/api/orders", ...)
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...data,
+          items: cartItems,
+        }),
+      });
+
+      const contentType = response.headers.get("content-type") || "";
+      const responseText = await response.text();
+      let result: any = null;
+
+      if (contentType.includes("application/json")) {
+        try {
+          result = JSON.parse(responseText);
+        } catch (parseError) {
+          console.error("Failed to parse JSON response:", parseError, responseText);
+          alert("Received invalid server response. Please try again.");
+          return;
+        }
+      } else {
+        console.error("Unexpected checkout response:", response.status, responseText);
+        alert(
+          response.ok
+            ? "Received unexpected server response."
+            : responseText || "Failed to place order."
+        );
+        return;
+      }
+
+      if (!response.ok) {
+        alert(result?.message || "Failed to place order.");
+        return;
+      }
+
+      dispatch(clearCart());
+
+      router.push(`/order-success?id=${result.order.id}`);
+    } catch (error) {
+      console.error("Checkout Error:", error);
+      alert("Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -201,7 +258,7 @@ export default function CheckoutForm() {
           </label>
 
           <input
-            {...register('country')}
+            {...register("country")}
             autoComplete="country-name"
             className="w-full rounded-xl border px-4 py-3 outline-none transition focus:border-green-600"
           />
