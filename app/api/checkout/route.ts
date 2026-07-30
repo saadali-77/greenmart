@@ -20,6 +20,7 @@ export async function POST(req: NextRequest) {
       paymentMethod,
     } = body;
 
+    // Validate checkout form
     const validation = checkoutSchema.safeParse({
       firstName,
       lastName,
@@ -43,6 +44,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Cart validation
     if (!items || items.length === 0) {
       return NextResponse.json(
         {
@@ -54,8 +56,10 @@ export async function POST(req: NextRequest) {
     }
 
     let subtotal = 0;
+
     const orderItems = [];
 
+    // Verify products from database
     for (const item of items) {
       const product = await prisma.product.findUnique({
         where: {
@@ -83,7 +87,9 @@ export async function POST(req: NextRequest) {
         );
       }
 
-      const discountedPrice = product.price * (1 - product.discount / 100);
+      const discountedPrice =
+        product.price * (1 - product.discount / 100);
+
       subtotal += discountedPrice * item.quantity;
 
       orderItems.push({
@@ -96,6 +102,7 @@ export async function POST(req: NextRequest) {
     const shipping = subtotal >= 3000 ? 0 : 250;
     const total = subtotal + shipping;
 
+    // Create Order
     const order = await prisma.order.create({
       data: {
         firstName,
@@ -111,6 +118,7 @@ export async function POST(req: NextRequest) {
         subtotal,
         shipping,
         total,
+
         items: {
           create: orderItems,
         },
