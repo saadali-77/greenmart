@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import ProductsTable from "@/components/admin/ProductTable";
 import DashboardHeader from "@/components/admin/DashboardHeader";
-
+import Link from "next/link";
 
 export default async function ProductsPage() {
   const products = await prisma.product.findMany({
@@ -20,10 +20,9 @@ export default async function ProductsPage() {
           title="Products"
           subtitle="Manage all products in your store."
         />
-<button className="btn btn-primary">
+<Link href="/admin/products/new" className="btn btn-primary">
   + Add Product
-</button>
-        
+</Link>
       </div>
 
       <ProductsTable products={products} />
