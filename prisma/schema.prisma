@@ -114,3 +114,12 @@ enum PaymentStatus {
   PAID
   REFUNDED
 }
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      String   @default("USER")
+
+  createdAt DateTime @default(now())
+}
