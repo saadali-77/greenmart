@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ShoppingCart } from "lucide-react";
 import { Product } from "@/types/product";
 
+
 interface ProductCardProps {
   product: Product;
 }
@@ -10,6 +11,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <div className="group overflow-hidden rounded-2xl border border-base-200 bg-base-100 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
       {/* Product Image */}
+      
       <div className="relative h-56 overflow-hidden">
         <Image
           src={product.image}

@@ -1,7 +1,7 @@
 "use client";
 
 import { Bell, Search, UserCircle } from "lucide-react";
-
+import { logoutUser } from "@/app/(Auth)/logout/Action";
 export default function Navbar() {
   return (
     <header className="navbar bg-base-100 shadow px-6">
@@ -43,12 +43,21 @@ export default function Navbar() {
             <li>
               <a>Settings</a>
             </li>
-
             <li>
-              <a className="text-error">
-                Logout
-              </a>
-            </li>
+  <form action={logoutUser}>
+    <button
+      type="submit"
+      className="text-error w-full text-left"
+    >
+      Logout
+    </button>
+  </form>
+</li>
+
+
+
+            
+            
           </ul>
         </div>
       </div>
