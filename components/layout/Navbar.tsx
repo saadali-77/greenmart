@@ -38,7 +38,7 @@ export default async function Navbar() {
               </Link>
 
               <Link
-                href="/register"
+                href="/Register"
                 className="rounded-lg bg-green-700 px-4 py-2"
               >
                 Register
