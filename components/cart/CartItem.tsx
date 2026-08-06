@@ -5,7 +5,7 @@ import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
 import QuantitySelector from "./QuantitySelector";
-import { CartItem as CartItemType } from "@/Store/features/Cart/cartTypes";
+import { CartItem as CartItemType } from "@/Store/features/Cart/carttype";
 import { useAppDispatch } from "@/Store/hooks";
 import {
   decreaseQuantity,

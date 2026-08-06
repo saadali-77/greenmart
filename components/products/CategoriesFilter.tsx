@@ -67,7 +67,9 @@ export default function ProductFilters({
   }, [search, selectedCategory, sortBy]);
 
   // Pagination
-  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+  const totalPages = Math.ceil(
+    filteredProducts.length / productsPerPage
+  );
 
   const paginatedProducts = filteredProducts.slice(
     (currentPage - 1) * productsPerPage,
@@ -146,23 +148,26 @@ export default function ProductFilters({
             Previous
           </button>
 
-          {Array.from({ length: totalPages }, (_, index) => {
-            const page = index + 1;
+          {Array.from(
+            { length: totalPages },
+            (_, index) => {
+              const page = index + 1;
 
-            return (
-              <button
-                key={page}
-                onClick={() => setCurrentPage(page)}
-                className={`h-10 w-10 rounded-lg transition ${
-                  currentPage === page
-                    ? "bg-green-600 text-white"
-                    : "border hover:bg-green-100"
-                }`}
-              >
-                {page}
-              </button>
-            );
-          })}
+              return (
+                <button
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                  className={`h-10 w-10 rounded-lg transition ${
+                    currentPage === page
+                      ? "bg-green-600 text-white"
+                      : "border hover:bg-green-100"
+                  }`}
+                >
+                  {page}
+                </button>
+              );
+            }
+          )}
 
           <button
             onClick={() =>

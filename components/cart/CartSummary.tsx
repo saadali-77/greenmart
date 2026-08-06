@@ -2,6 +2,10 @@
 
 import Link from "next/link";
 import { useAppSelector } from "@/Store/hooks";
+import {
+  calculateShipping,
+  calculateTotal,
+} from "@/lib/cart";
 
 export default function CartSummary() {
   const items = useAppSelector(
@@ -13,6 +17,9 @@ export default function CartSummary() {
     0
   );
 
+  const shipping = calculateShipping(subtotal);
+  const total = calculateTotal(subtotal, shipping);
+
   return (
     <aside className="rounded-2xl border p-6 shadow-sm">
       <h2 className="mb-6 text-2xl font-bold">
@@ -21,15 +28,17 @@ export default function CartSummary() {
 
       <div className="mb-3 flex justify-between">
         <span>Subtotal</span>
-
         <span>Rs. {subtotal}</span>
       </div>
 
-      <div className="mb-6 flex justify-between">
+      <div className="mb-3 flex justify-between">
         <span>Shipping</span>
-
-        <span className="text-green-600">
-          Free
+        <span>
+          {shipping === 0 ? (
+            <span className="text-green-600">Free</span>
+          ) : (
+            `Rs. ${shipping}`
+          )}
         </span>
       </div>
 
@@ -37,8 +46,7 @@ export default function CartSummary() {
 
       <div className="my-6 flex justify-between text-xl font-bold">
         <span>Total</span>
-
-        <span>Rs. {subtotal}</span>
+        <span>Rs. {total}</span>
       </div>
 
       <Link
@@ -50,61 +58,3 @@ export default function CartSummary() {
     </aside>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// "use client";
-
-// import { useAppSelector } from "@/Store/hooks";
-
-// export default function CartSummary() {
-//   const items = useAppSelector((state) => state.cart.items);
-
-//   const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-//   const shipping = subtotal > 0 ? 100 : 0;
-//   const total = subtotal + shipping;
-
-//   return (
-//     <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-//       <h2 className="text-xl font-semibold text-gray-900">Order Summary</h2>
-//       <div className="mt-4 space-y-3 text-sm text-gray-600">
-//         <div className="flex justify-between">
-//           <span>Subtotal</span>
-//           <span>Rs. {subtotal}</span>
-//         </div>
-//         <div className="flex justify-between">
-//           <span>Shipping</span>
-//           <span>Rs. {shipping}</span>
-//         </div>
-//         <div className="flex justify-between border-t border-gray-200 pt-3 text-base font-semibold text-gray-900">
-//           <span>Total</span>
-//           <span>Rs. {total}</span>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }

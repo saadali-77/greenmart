@@ -8,6 +8,7 @@ import Categories from "@/components/home/Categories";
 import Offers from "@/components/home/Offers";
 import ProductGrid from "@/components/products/productGrid";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
+import ProductFilters from "@/components/products/CategoriesFilter";
 import { products } from "@/src/data/products";
 export default function Home(){
 
@@ -20,7 +21,6 @@ return (
 
 
 
-<Categories />
 
 <FeaturedProducts />
 <Offers />

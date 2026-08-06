@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ShoppingCart } from "lucide-react";
 import { Product } from "@/types/product";
+import AddToCartButton from "@/components/products/AddtoCart";
 
 interface ProductCardProps {
   product: Product;
@@ -57,10 +58,7 @@ export default function ProductCard({
       </Link>
 
       <div className="px-4 pb-4">
-        <button className="flex w-full items-center justify-center gap-2 rounded-xl bg-green-600 px-4 py-3 font-medium text-white transition hover:bg-green-700">
-          <ShoppingCart size={18} />
-          Add to Cart
-        </button>
+       <AddToCartButton product={product} />
       </div>
     </div>
   );
