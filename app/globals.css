@@ -2,6 +2,38 @@
 
 @source "../**/*.{js,ts,jsx,tsx,html}";
 
+@plugin "daisyui" {
+  themes: false;
+}
+
+@plugin "daisyui/theme" {
+  name: "greenmart";
+  default: true;
+  color-scheme: light;
+  --color-base-100: #ffffff;
+  --color-base-200: #f3f6f4;
+  --color-base-300: #e2e8e4;
+  --color-base-content: #171717;
+  --color-primary: #16a34a;
+  --color-primary-content: #ffffff;
+  --color-secondary: #facc15;
+  --color-secondary-content: #422006;
+  --color-accent: #0d9488;
+  --color-accent-content: #ffffff;
+  --color-neutral: #1f2937;
+  --color-neutral-content: #f9fafb;
+  --color-info: #0284c7;
+  --color-info-content: #ffffff;
+  --color-success: #16a34a;
+  --color-success-content: #ffffff;
+  --color-warning: #f59e0b;
+  --color-warning-content: #451a03;
+  --color-error: #dc2626;
+  --color-error-content: #ffffff;
+  --radius-box: 0.75rem;
+  --radius-field: 0.5rem;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

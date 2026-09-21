@@ -6,7 +6,7 @@ import {
   ShoppingCart,
   Package,
   Users,
-  DollarSign,
+  Banknote,
   TrendingUp,
   AlertTriangle,
 } from "lucide-react";
@@ -73,8 +73,15 @@ export default async function AdminDashboard() {
 
         <StatsCard
           title="Revenue"
-          value={`Rs ${totalRevenue.toLocaleString()}`}
-          icon={<DollarSign size={24} />}
+          value={
+            <>
+              <span className="mr-1 text-sm font-semibold text-base-content/60">
+                PKR
+              </span>
+              {totalRevenue.toLocaleString()}
+            </>
+          }
+          icon={<Banknote size={24} />}
           iconClassName="bg-amber-100 text-amber-600"
         />
       </section>
@@ -85,7 +92,7 @@ export default async function AdminDashboard() {
       {/* Widgets */}
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Sales Chart */}
-        <div className="card bg-base-100 shadow-sm border border-base-200">
+        <div className="card border border-base-300 bg-base-100 shadow-sm">
           <div className="card-body">
             <div className="flex items-center justify-between">
               <h2 className="card-title text-base font-semibold">
@@ -106,7 +113,7 @@ export default async function AdminDashboard() {
         </div>
 
         {/* Low Stock */}
-        <div className="card bg-base-100 shadow-sm border border-base-200">
+        <div className="card border border-base-300 bg-base-100 shadow-sm">
           <div className="card-body">
             <div className="flex items-center justify-between">
               <h2 className="card-title text-base font-semibold">

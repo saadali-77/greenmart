@@ -119,14 +119,14 @@ export default function OrderSuccessPage() {
     order.status.charAt(0) + order.status.slice(1).toLowerCase();
 
   return (
-    <div className="min-h-screen bg-base-200 py-10">
-      <div className="mx-auto max-w-4xl space-y-6 px-4">
+    <div className="min-h-screen bg-base-200 py-6 sm:py-10">
+      <div className="mx-auto max-w-4xl space-y-4 sm:space-y-6 px-4">
         {/* Success Header */}
 
-        <div className="rounded-2xl bg-base-100 p-8 text-center shadow">
+        <div className="rounded-2xl bg-base-100 p-6 sm:p-8 text-center shadow">
           <CheckCircle size={70} className="mx-auto mb-4 text-success" />
 
-          <h1 className="text-3xl font-bold">Order Placed Successfully!</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold">Order Placed Successfully!</h1>
 
           <p className="mt-3 text-lg">
             Thank you,
@@ -227,9 +227,9 @@ export default function OrderSuccessPage() {
             {order.items.map((item) => (
               <div
                 key={item.id}
-                className="flex items-center gap-4 rounded-xl border border-base-300 p-4"
+                className="flex flex-wrap items-center gap-3 sm:gap-4 rounded-xl border border-base-300 p-3 sm:p-4"
               >
-                <div className="relative h-20 w-20 overflow-hidden rounded-xl">
+                <div className="relative h-16 w-16 sm:h-20 sm:w-20 shrink-0 overflow-hidden rounded-xl">
                   <Image
                     src={item.product.image}
                     alt={item.product.name}
@@ -239,8 +239,8 @@ export default function OrderSuccessPage() {
                   />
                 </div>
 
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold">{item.product.name}</h3>
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-base sm:text-lg font-semibold">{item.product.name}</h3>
 
                   <p className="text-sm opacity-70">
                     Rs {item.price.toLocaleString()} × {item.quantity}
@@ -288,14 +288,14 @@ export default function OrderSuccessPage() {
         <div className="flex flex-col justify-center gap-4 sm:flex-row">
           <Link
             href="/products"
-            className="btn rounded-full border-0 bg-green-600 px-6 py-4 text-white hover:bg-green-700"
+            className="btn w-full sm:w-auto rounded-full border-0 bg-green-600 px-6 py-4 text-white hover:bg-green-700"
           >
             Continue Shopping
           </Link>
 
           <Link
             href="/"
-            className="btn rounded-full border-0 bg-green-600 px-6 py-4 text-white hover:bg-green-700"
+            className="btn w-full sm:w-auto rounded-full border-0 bg-green-600 px-6 py-4 text-white hover:bg-green-700"
           >
             Back to Home
           </Link>

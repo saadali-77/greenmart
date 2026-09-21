@@ -32,11 +32,11 @@ export default async function EditProductPage({
   }
 
   return (
-    <div className="p-6">
+    <>
       <EditProductForm
         product={product}
         categories={categories}
       />
-    </div>
+    </>
   );
 }

@@ -19,7 +19,7 @@ const total = calculateTotal(subtotal, shipping);
   
 
   return (
-    <aside className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+    <aside className="rounded-2xl border border-gray-200 bg-white p-5 sm:p-6 shadow-sm">
       <h2 className="mb-6 text-2xl font-bold">
         Order Summary
       </h2>
@@ -31,7 +31,7 @@ const total = calculateTotal(subtotal, shipping);
             key={item.id}
             className="flex items-center gap-4"
           >
-            <div className="relative h-16 w-16 overflow-hidden rounded-lg">
+            <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg">
               <Image
                 src={item.image}
                 alt={item.name}
@@ -40,7 +40,7 @@ const total = calculateTotal(subtotal, shipping);
               />
             </div>
 
-            <div className="flex-1">
+            <div className="min-w-0 flex-1">
               <h3 className="font-medium">
                 {item.name}
               </h3>

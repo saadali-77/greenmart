@@ -21,7 +21,7 @@ export default function CartSummary() {
   const total = calculateTotal(subtotal, shipping);
 
   return (
-    <aside className="rounded-2xl border p-6 shadow-sm">
+    <aside className="rounded-2xl border bg-white p-5 sm:p-6 shadow-sm lg:sticky lg:top-24 lg:self-start">
       <h2 className="mb-6 text-2xl font-bold">
         Order Summary
       </h2>

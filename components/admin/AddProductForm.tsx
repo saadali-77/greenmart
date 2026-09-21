@@ -82,8 +82,8 @@ export default function AddProductForm({
     formData.price -
     (formData.price * formData.discount) / 100;
       return (
-    <div className="min-h-screen bg-base-200 px-4 py-10">
-      <div className="mx-auto max-w-4xl">
+    <div className="">
+      <div className="mx-auto w-full max-w-4xl">
         <header className="mb-6">
           <h1 className="text-3xl font-semibold tracking-tight">
             Add Product
@@ -108,8 +108,8 @@ export default function AddProductForm({
 
             {/* Name + Category */}
             <section className="grid gap-5 md:grid-cols-2">
-              <label className="form-control">
-                <span className="label-text mb-1 font-medium">
+              <label className="flex flex-col">
+                <span className="text-sm mb-1 font-medium">
                   Product Name
                 </span>
 
@@ -124,8 +124,8 @@ export default function AddProductForm({
                 />
               </label>
 
-              <label className="form-control">
-                <span className="label-text mb-1 font-medium">
+              <label className="flex flex-col">
+                <span className="text-sm mb-1 font-medium">
                   Category
                 </span>
 
@@ -153,8 +153,8 @@ export default function AddProductForm({
             </section>
 
             {/* Description */}
-            <label className="form-control">
-              <span className="label-text mb-1 font-medium">
+            <label className="flex flex-col">
+              <span className="text-sm mb-1 font-medium">
                 Description
               </span>
 
@@ -171,8 +171,8 @@ export default function AddProductForm({
 
             {/* Image */}
             <section className="grid gap-5 md:grid-cols-[1fr_auto] md:items-start">
-              <label className="form-control">
-                <span className="label-text mb-1 font-medium">
+              <label className="flex flex-col">
+                <span className="text-sm mb-1 font-medium">
                   Image URL
                 </span>
 
@@ -186,7 +186,7 @@ export default function AddProductForm({
                   required
                 />
 
-                <span className="label-text-alt mt-1 opacity-60">
+                <span className="text-xs mt-1 opacity-60">
                   Paste a valid image URL.
                 </span>
               </label>
@@ -208,8 +208,8 @@ export default function AddProductForm({
 
             {/* Price */}
             <section className="grid grid-cols-2 gap-5 md:grid-cols-4">
-              <label className="form-control">
-                <span className="label-text mb-1 font-medium">
+              <label className="flex flex-col">
+                <span className="text-sm mb-1 font-medium">
                   Price
                 </span>
 
@@ -225,8 +225,8 @@ export default function AddProductForm({
                 />
               </label>
 
-              <label className="form-control">
-                <span className="label-text mb-1 font-medium">
+              <label className="flex flex-col">
+                <span className="text-sm mb-1 font-medium">
                   Discount %
                 </span>
 
@@ -241,8 +241,8 @@ export default function AddProductForm({
                 />
               </label>
 
-              <label className="form-control">
-                <span className="label-text mb-1 font-medium">
+              <label className="flex flex-col">
+                <span className="text-sm mb-1 font-medium">
                   Stock
                 </span>
 
@@ -257,8 +257,8 @@ export default function AddProductForm({
                 />
               </label>
 
-              <label className="form-control justify-center">
-                <span className="label-text mb-1 font-medium">
+              <label className="flex flex-col justify-center">
+                <span className="text-sm mb-1 font-medium">
                   Featured
                 </span>
 
@@ -284,7 +284,7 @@ export default function AddProductForm({
               <p className="text-sm opacity-70">
                 Final price after discount:
                 <span className="ml-2 font-semibold text-primary">
-                  ${finalPrice.toFixed(2)}
+                  Rs. {finalPrice.toFixed(2)}
                 </span>
               </p>
             )}
@@ -305,9 +305,6 @@ export default function AddProductForm({
                 type="submit"
                 className="btn btn-primary min-w-40"
                 disabled={isPending}
-                onClick={()=>{
-                    router.push("/admin/products/")
-                }}
               >
                 {isPending ? (
                   <>

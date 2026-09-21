@@ -25,9 +25,9 @@ export default async function Categories() {
   });
 
   return (
-    <section className="max-w-7xl mx-auto px-6 py-16">
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
       <div className="mb-10 text-center">
-        <h2 className="text-4xl font-bold">
+        <h2 className="text-3xl sm:text-4xl font-bold">
           Shop by Category
         </h2>
 
@@ -36,19 +36,19 @@ export default async function Categories() {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-6">
+      <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-6">
         {categories.map((category) => (
           <Link
             key={category.id}
             href={`/products?category=${encodeURIComponent(category.name)}`}
             className="group"
           >
-            <div className="flex h-48 flex-col items-center justify-center rounded-2xl border-2 border-base-300 bg-base-100 p-6 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-success hover:shadow-xl">
-              <div className="text-6xl transition-transform duration-300 group-hover:scale-110">
+            <div className="flex h-40 sm:h-48 flex-col items-center justify-center rounded-2xl border-2 border-base-300 bg-base-100 p-4 sm:p-6 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-success hover:shadow-xl">
+              <div className="text-5xl sm:text-6xl transition-transform duration-300 group-hover:scale-110">
                 {categoryIcons[category.name] ?? "🛒"}
               </div>
 
-              <h3 className="mt-5 text-lg font-bold">
+              <h3 className="mt-3 sm:mt-5 text-base sm:text-lg font-bold text-center">
                 {category.name}
               </h3>
 

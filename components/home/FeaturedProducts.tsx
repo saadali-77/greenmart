@@ -7,11 +7,11 @@ export default async function FeaturedProducts() {
   const products: Product[] = await getFeaturedProducts();
 
   return (
-    <section className="py-16">
+    <section className="py-10 sm:py-16">
       <div className="container mx-auto px-4">
         {/* Heading */}
         <div className="mb-10 text-center">
-          <h2 className="text-4xl font-bold">Featured Products</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold">Featured Products</h2>
           <p className="mt-3 text-base-content/70">
             Discover our best-selling grocery items.
           </p>

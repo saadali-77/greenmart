@@ -1,8 +1,3 @@
-
-
-
-
-
 import { prisma } from "@/lib/prisma";
 import AddProductForm from "@/components/admin/AddProductForm";
 
@@ -13,9 +8,5 @@ export default async function NewProductPage() {
     },
   });
 
-  return (
-    <div className="p-6">
-      <AddProductForm categories={categories} />
-    </div>
-  );
+  return <AddProductForm categories={categories} />;
 }

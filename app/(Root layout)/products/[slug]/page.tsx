@@ -31,21 +31,21 @@ export default async function ProductPage({
       : null;
 
   return (
-    <main className="max-w-7xl mx-auto px-6 py-12">
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
 
       {/* Breadcrumb */}
 
-      <p className="text-sm text-gray-500 mb-8">
+      <p className="text-sm text-gray-500 mb-6 sm:mb-8 break-words">
         Home / Products / {product.name}
       </p>
 
       {/* Product */}
 
-      <div className="grid lg:grid-cols-2 gap-12">
+      <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
 
         {/* Image */}
 
-        <div className="relative h-[550px] overflow-hidden rounded-2xl border">
+        <div className="relative h-72 sm:h-96 lg:h-[550px] overflow-hidden rounded-2xl border">
           <Image
             src={product.image}
             alt={product.name}
@@ -63,7 +63,7 @@ export default async function ProductPage({
             {product.category.name}
           </span>
 
-          <h1 className="mt-4 text-4xl font-bold">
+          <h1 className="mt-4 text-2xl sm:text-4xl font-bold">
             {product.name}
           </h1>
 
@@ -71,14 +71,14 @@ export default async function ProductPage({
             {product.description}
           </p>
 
-          <div className="mt-8 flex items-center gap-4">
+          <div className="mt-6 sm:mt-8 flex flex-wrap items-center gap-x-4 gap-y-1">
 
-            <span className="text-4xl font-bold text-green-600">
+            <span className="text-3xl sm:text-4xl font-bold text-green-600">
               Rs. {product.price}
             </span>
 
             {originalPrice && (
-              <span className="text-2xl text-gray-400 line-through">
+              <span className="text-xl sm:text-2xl text-gray-400 line-through">
                 Rs. {originalPrice}
               </span>
             )}
@@ -120,9 +120,9 @@ export default async function ProductPage({
       {/* Related Products */}
 
       {relatedProducts.length > 0 && (
-        <section className="mt-24">
+        <section className="mt-14 sm:mt-24">
 
-          <h2 className="mb-8 text-3xl font-bold">
+          <h2 className="mb-6 sm:mb-8 text-2xl sm:text-3xl font-bold">
             Related Products
           </h2>
 

@@ -24,8 +24,8 @@ const MotionLink = motion(Link);
 
 export default function Hero() {
   return (
-    <section className="bg-green-50 py-20 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
+    <section className="bg-green-50 py-12 sm:py-16 lg:py-20 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-8 md:gap-10 items-center">
         <motion.div variants={container} initial="hidden" animate="show">
           <motion.span
             variants={fadeUp}
@@ -37,24 +37,24 @@ export default function Hero() {
 
           <motion.h1
             variants={fadeUp}
-            className="mt-4 text-5xl font-bold text-green-700 leading-tight"
+            className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold text-green-700 leading-tight"
           >
             Fresh Groceries Delivered To Your Door
           </motion.h1>
 
           <motion.p
             variants={fadeUp}
-            className="mt-5 text-gray-600 text-lg max-w-md"
+            className="mt-4 sm:mt-5 text-gray-600 text-base sm:text-lg max-w-md"
           >
             Shop fresh fruits, vegetables, dairy products and daily essentials from GreenMart.
           </motion.p>
 
-          <motion.div variants={fadeUp} className="mt-8 flex items-center gap-4">
+          <motion.div variants={fadeUp} className="mt-6 sm:mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
             <MotionLink
               href="/products"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
-              className="bg-green-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-green-700 transition-colors inline-block"
+              className="bg-green-600 text-white px-6 sm:px-8 py-3 rounded-lg font-medium hover:bg-green-700 transition-colors inline-block"
             >
               Shop Now
             </MotionLink>
@@ -62,7 +62,7 @@ export default function Hero() {
               href="/categories"
               whileHover={{ scale: 1.04, backgroundColor: "#dcfce7" }}
               whileTap={{ scale: 0.97 }}
-              className="border border-green-600 text-green-700 px-8 py-3 rounded-lg font-medium transition-colors inline-block"
+              className="border border-green-600 text-green-700 px-6 sm:px-8 py-3 rounded-lg font-medium transition-colors inline-block"
             >
               Browse Categories
             </MotionLink>
@@ -70,7 +70,7 @@ export default function Hero() {
 
           <motion.div
             variants={fadeUp}
-            className="mt-10 flex gap-8 border-t border-green-200 pt-6"
+            className="mt-8 sm:mt-10 flex flex-wrap gap-x-8 gap-y-4 border-t border-green-200 pt-6"
           >
             {[
               { value: "12k+", label: "Orders delivered" },
@@ -78,7 +78,7 @@ export default function Hero() {
               { value: "4.8★", label: "Customer rating" },
             ].map((stat) => (
               <div key={stat.label}>
-                <p className="text-2xl font-bold text-green-700">{stat.value}</p>
+                <p className="text-xl sm:text-2xl font-bold text-green-700">{stat.value}</p>
                 <p className="text-xs text-gray-500 uppercase tracking-wide">
                   {stat.label}
                 </p>
@@ -92,7 +92,7 @@ export default function Hero() {
           animate={{ opacity: 1, scale: 1, x: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" as const, delay: 0.2 }}
           whileHover={{ scale: 1.02 }}
-          className="relative h-96 rounded-2xl overflow-hidden shadow-xl"
+          className="relative h-64 sm:h-80 md:h-96 rounded-2xl overflow-hidden shadow-xl"
         >
           <Image
             src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=1200&q=80"

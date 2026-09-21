@@ -100,7 +100,7 @@ export default function CheckoutForm() {
     <form
       noValidate
       onSubmit={handleSubmit(onSubmit)}
-      className="space-y-8 rounded-2xl border bg-white p-6 shadow-sm"
+      className="space-y-8 rounded-2xl border bg-white p-4 sm:p-6 shadow-sm"
     >
       <h2 className="text-2xl font-bold">
         Shipping Information

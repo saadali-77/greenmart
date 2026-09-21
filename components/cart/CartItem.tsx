@@ -31,9 +31,9 @@ export default function CartItem({ item }: CartItemProps) {
   };
 
   return (
-    <div className="flex flex-col gap-5 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm md:flex-row md:items-center">
+    <div className="flex flex-col gap-5 rounded-2xl border border-gray-200 bg-white p-4 sm:p-5 shadow-sm md:flex-row md:items-center">
       {/* Product Image */}
-      <div className="relative h-24 w-24 overflow-hidden rounded-xl">
+      <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl">
         <Image
           src={item.image}
           alt={item.name}
@@ -65,7 +65,7 @@ export default function CartItem({ item }: CartItemProps) {
       />
 
       {/* Subtotal */}
-      <div className="min-w-[120px] text-center">
+      <div className="md:min-w-[120px] md:text-center">
         <p className="text-sm text-gray-500">
           Subtotal
         </p>
@@ -79,7 +79,7 @@ export default function CartItem({ item }: CartItemProps) {
       <button
         type="button"
         onClick={handleRemove}
-        className="self-center rounded-xl p-3 text-red-500 transition hover:bg-red-50"
+        className="self-end md:self-center rounded-xl p-3 text-red-500 transition hover:bg-red-50"
         aria-label={`Remove ${item.name}`}
       >
         <Trash2 size={20} />

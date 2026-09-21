@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Order } from "@prisma/client";
 
+import StatusBadge from "./StatusBadge";
+
 interface RecentOrdersProps {
   orders: Order[];
 }
@@ -8,95 +10,68 @@ interface RecentOrdersProps {
 export default function RecentOrders({
   orders,
 }: RecentOrdersProps) {
-  const badgeClass = (status: string) => {
-    switch (status) {
-      case "Delivered":
-        return "badge badge-success";
-
-      case "Processing":
-        return "badge badge-info";
-
-      case "Pending":
-        return "badge badge-warning";
-
-      case "Cancelled":
-        return "badge badge-error";
-
-      default:
-        return "badge badge-outline";
-    }
-  };
-
   return (
-    <div className="card bg-base-100 shadow-md">
-      <div className="card-body">
-        <div className="flex items-center justify-between mb-5">
-          <h2 className="card-title">
-            Recent Orders
-          </h2>
+    <div className="card border border-base-300 bg-base-100 shadow-sm">
+      <div className="flex items-center justify-between px-6 pt-5">
+        <h2 className="text-base font-semibold">Recent Orders</h2>
 
-          <Link
-            href="/admin/orders"
-            className="btn btn-sm btn-primary"
-          >
-            View All
-          </Link>
-        </div>
+        <Link
+          href="/admin/orders"
+          className="btn btn-sm btn-primary btn-soft"
+        >
+          View All
+        </Link>
+      </div>
 
-        <div className="overflow-x-auto">
-          <table className="table table-zebra">
-            <thead>
+      <div className="mt-4 overflow-x-auto">
+        <table className="table">
+          <thead className="bg-base-200 text-xs uppercase tracking-wider">
+            <tr>
+              <th className="px-6 py-3">Order ID</th>
+              <th className="px-6 py-3">Customer</th>
+              <th className="px-6 py-3">Date</th>
+              <th className="px-6 py-3 text-right">Total</th>
+              <th className="px-6 py-3">Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {orders.length === 0 ? (
               <tr>
-                <th>Order ID</th>
-                <th>Customer</th>
-                <th>Date</th>
-                <th>Total</th>
-                <th>Status</th>
+                <td
+                  colSpan={5}
+                  className="py-10 text-center text-base-content/60"
+                >
+                  No recent orders found.
+                </td>
               </tr>
-            </thead>
+            ) : (
+              orders.map((order) => (
+                <tr key={order.id} className="hover:bg-base-200/50">
+                  <td className="px-6 py-3 font-mono text-sm">
+                    #{order.id.slice(0, 8)}
+                  </td>
 
-            <tbody>
-              {orders.length === 0 ? (
-                <tr>
-                  <td
-                    colSpan={5}
-                    className="text-center py-8"
-                  >
-                    No recent orders found.
+                  <td className="px-6 py-3 font-medium">
+                    {order.firstName} {order.lastName}
+                  </td>
+
+                  <td className="px-6 py-3 whitespace-nowrap text-base-content/70">
+                    {new Date(order.createdAt).toLocaleDateString()}
+                  </td>
+
+                  <td className="px-6 py-3 text-right font-semibold whitespace-nowrap">
+                    Rs {order.total.toLocaleString()}
+                  </td>
+
+                  <td className="px-6 py-3">
+                    <StatusBadge status={order.status} />
                   </td>
                 </tr>
-              ) : (
-                orders.map((order) => (
-                  <tr key={order.id}>
-                    <td className="font-medium">
-                      #{order.id.slice(0, 8)}
-                    </td>
-
-                    <td>
-                      {order.firstName} {order.lastName}
-                    </td>
-
-                    <td>
-                      {new Date(
-                        order.createdAt
-                      ).toLocaleDateString()}
-                    </td>
-
-                    <td className="font-semibold">
-                      Rs {order.total}
-                    </td>
-
-                    <td>
-                      <span className={badgeClass(order.status)}>
-                        {order.status}
-                      </span>
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
+              ))
+            )}
+          </tbody>
+        </table>
       </div>
     </div>
   );
