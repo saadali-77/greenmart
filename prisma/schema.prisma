@@ -40,6 +40,7 @@ model Product {
   category   Category @relation(fields: [categoryId], references: [id])
 
   orderItems OrderItem[]
+  cartItems  CartItem[]
 }
 
 model Order {
@@ -123,4 +124,24 @@ model User {
   role      String   @default("USER")
 
   createdAt DateTime @default(now())
+
+  cartItems CartItem[]
+}
+
+model CartItem {
+  id String @id @default(cuid())
+
+  quantity Int
+
+  userId    String
+  productId String
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, productId])
+  @@index([userId])
 }

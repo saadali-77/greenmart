@@ -14,10 +14,13 @@ interface CartProduct {
 
 interface CartState {
   items: CartItem[];
+  // Id of the user this cart belongs to, or null for a guest cart.
+  owner: string | null;
 }
 
 const initialState: CartState = {
   items: [],
+  owner: null,
 };
 
 const cartSlice = createSlice({
@@ -89,6 +92,24 @@ const cartSlice = createSlice({
     clearCart: (state) => {
       state.items = [];
     },
+
+    // Replaces the cart with the one saved on the server for `owner`.
+    setCart: (
+      state,
+      action: PayloadAction<{
+        owner: string;
+        items: CartItem[];
+      }>
+    ) => {
+      state.owner = action.payload.owner;
+      state.items = action.payload.items;
+    },
+
+    // Wipes the local copy (logout) without touching the saved cart.
+    resetCart: (state) => {
+      state.owner = null;
+      state.items = [];
+    },
   },
 });
 
@@ -98,6 +119,8 @@ export const {
   increaseQuantity,
   decreaseQuantity,
   clearCart,
+  setCart,
+  resetCart,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

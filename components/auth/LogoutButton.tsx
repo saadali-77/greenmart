@@ -3,7 +3,8 @@
 import { useTransition } from "react";
 
 import { useAppDispatch } from "@/Store/hooks";
-import { clearCart } from '@/Store/features/Cart/cartSlice' // Update this path if needed
+import { resetCart } from "@/Store/features/Cart/cartSlice";
+import { flushCartSync } from "@/Store/features/Cart/cartSync";
 import { logout } from "@/app/(Root layout)/logout/action";
 
 export default function LogoutButton() {
@@ -11,11 +12,13 @@ export default function LogoutButton() {
   const [pending, startTransition] = useTransition();
 
   function handleLogout() {
-    // Clear Redux cart
-    dispatch(clearCart());
-
-    // Execute server logout action
     startTransition(async () => {
+      // Save any pending change to the user's cart first, then remove the
+      // local copy so the next person on this browser doesn't see it.
+      // The saved cart stays in the database until they log in again.
+      await flushCartSync();
+      dispatch(resetCart());
+
       await logout();
     });
   }
